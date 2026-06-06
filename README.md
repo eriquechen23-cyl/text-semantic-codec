@@ -59,3 +59,47 @@ Input Sentence
 5. Add noisy channel simulation.
 
 See [reports/stage-01-text-prototype/report.html](reports/stage-01-text-prototype/report.html) for the first decision report.
+
+## Web App Prototype
+
+The repository now includes a deployable web prototype:
+
+- `backend/`: FastAPI API for text semantic conversion.
+- `frontend/`: Angular 21 standalone UI.
+- `render.yaml`: Render Blueprint with one Python web service and one static site.
+
+### Backend Local Run
+
+```bash
+pip install -r backend/requirements.txt
+uvicorn backend.main:app --reload
+```
+
+API endpoint:
+
+```text
+POST /api/semantic/convert
+```
+
+### Frontend Local Run
+
+Angular 21 requires Node 20+.
+
+```bash
+cd frontend
+npm install
+npm start
+```
+
+The UI includes an editable backend API URL field, so local and Render deployments can point to different API hosts without rebuilding.
+
+### Render Deployment
+
+Create a Render Blueprint from this GitHub repo. Render will read `render.yaml` and create:
+
+- `text-semantic-codec-api`
+- `text-semantic-codec-ui`
+
+After deployment, set the API service `ALLOWED_ORIGINS` value to the final frontend Render URL instead of `*` for production use.
+
+See [reports/stage-02-render-angular/report.html](reports/stage-02-render-angular/report.html) for the deployment decision report.

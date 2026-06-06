@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stage 02 Report - Render FastAPI and Angular UI</title>
+  <style>
+    body { margin: 0; font-family: Arial, "Noto Sans TC", sans-serif; color: #202124; background: #f6f8fa; line-height: 1.55; }
+    main { max-width: 1040px; margin: 0 auto; padding: 32px 20px; }
+    section, header { background: #fff; border: 1px solid #d8dee4; border-radius: 8px; padding: 22px; margin-bottom: 16px; }
+    h1, h2 { margin: 0 0 12px; letter-spacing: 0; }
+    h1 { font-size: 30px; }
+    h2 { color: #0b6b57; font-size: 21px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    th, td { border: 1px solid #d8dee4; padding: 10px; text-align: left; vertical-align: top; }
+    th { background: #eef6f4; }
+    code, pre { font-family: Consolas, "Liberation Mono", monospace; }
+    pre { overflow-x: auto; background: #f0f3f5; border: 1px solid #d8dee4; border-radius: 6px; padding: 14px; }
+    .decision { border-left: 4px solid #0b6b57; }
+    .risk { border-left: 4px solid #9a5b00; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p>Stage 02 - Deployable Web Prototype</p>
+      <h1>Render FastAPI + Angular 21 UI 決策報告</h1>
+      <p>本階段把 Stage 01 CLI prototype 包成 HTTP API，並加入 Angular 21 standalone frontend，讓使用者可以在瀏覽器輸入文字、選擇 bottleneck 模式、取得 semantic code 與 recovered text。</p>
+    </header>
+
+    <section>
+      <h2>Architecture</h2>
+      <pre>Angular UI
+  -> POST /api/semantic/convert
+  -> FastAPI backend
+  -> semantic_text_codec package
+  -> JSON response with code, reconstruction, metrics</pre>
+    </section>
+
+    <section>
+      <h2>Deployment Shape</h2>
+      <table>
+        <tr><th>Service</th><th>Platform</th><th>Command</th></tr>
+        <tr><td>Backend API</td><td>Render Python Web Service</td><td><code>uvicorn backend.main:app --host 0.0.0.0 --port $PORT</code></td></tr>
+        <tr><td>Frontend UI</td><td>Render Static Site</td><td><code>cd frontend && npm ci && npm run build</code></td></tr>
+      </table>
+    </section>
+
+    <section class="decision">
+      <h2>Decision</h2>
+      <p>建議採用雙服務部署：FastAPI 後端獨立部署，Angular 前端作為 static site。這讓 API 可以先穩定演進，前端也能快速替換 API URL 做 demo、測試或部署。</p>
+    </section>
+
+    <section class="risk">
+      <h2>Risks And Follow-up</h2>
+      <table>
+        <tr><th>風險</th><th>影響</th><th>下一步</th></tr>
+        <tr><td>Angular 21 需要 Node 20+</td><td>本機 Node 18 不能可靠建置</td><td>Render 或本機升級 Node 後執行 npm ci/build</td></tr>
+        <tr><td>CORS 目前 prototype 預設允許所有來源</td><td>正式服務安全性不足</td><td>部署後把 ALLOWED_ORIGINS 改成 Angular Render 網址</td></tr>
+        <tr><td>Semantic codec 仍是 rule-based</td><td>開放句型效果有限</td><td>Stage 03 導入 embedding-based encoder</td></tr>
+      </table>
+    </section>
+  </main>
+</body>
+</html>
