@@ -59,9 +59,17 @@
       </table>
     </section>
 
-    <section class="blocked">
-      <h2>Render Deployment Blocker</h2>
-      <p>Render deployment requires either a logged-in Render Dashboard session or a Render API key/CLI. At this checkpoint, local tooling did not expose Render CLI or <code>RENDER_API_KEY</code>, so the backend service could not be created programmatically from this environment. The repo is ready for Render Blueprint creation from <code>render.yaml</code>.</p>
+    <section class="ok">
+      <h2>Render Deployment</h2>
+      <table>
+        <tr><th>項目</th><th>結果</th></tr>
+        <tr><td>Backend URL</td><td><code>https://text-semantic-codec-api.onrender.com</code></td></tr>
+        <tr><td>Service ID</td><td><code>srv-d8i3k4gjo6nc73csg4eg</code></td></tr>
+        <tr><td>Deploy ID</td><td><code>dep-d8i3k4ojo6nc73csg4t0</code></td></tr>
+        <tr><td>Plan</td><td><code>free</code></td></tr>
+        <tr><td>Health Check</td><td><code>GET /health -> {"status":"ok"}</code></td></tr>
+        <tr><td>Conversion Check</td><td><code>POST /api/semantic/convert -> recovered text, 32 code bits, similarity 1.0</code></td></tr>
+      </table>
     </section>
   </main>
 </body>

@@ -101,6 +101,18 @@ Create a Render Blueprint from this GitHub repo. Render will read `render.yaml` 
 
 After deployment, set the API service `ALLOWED_ORIGINS` value to the final Vercel frontend URL instead of `*` for production use.
 
+Current backend deployment:
+
+```text
+https://text-semantic-codec-api.onrender.com
+```
+
+Health check:
+
+```text
+https://text-semantic-codec-api.onrender.com/health
+```
+
 ### Vercel Frontend Deployment
 
 The Angular UI is configured for Vercel with `frontend/vercel.json`.
