@@ -25,16 +25,40 @@ The meeting was delayed due to heavy rain.
 
 ## Prototype Architecture
 
-```text
-Input Sentence
-  -> Tokenizer
-  -> Semantic Encoder
-  -> Semantic Bottleneck
-  -> Compact Semantic Code
-  -> Semantic Decoder
-  -> Recovered Sentence
-  -> Metrics
+```mermaid
+flowchart LR
+    A["Input sentence"] --> B["Tokenizer"]
+    B --> C["Semantic encoder"]
+    C --> D["Semantic frame<br/>concepts + flags"]
+    D --> E{"Bottleneck mode"}
+    E --> F["Discrete codebook<br/>compact token IDs"]
+    E --> G["Continuous vector<br/>fixed dimensions"]
+    F --> H["Semantic code"]
+    G --> H
+    H --> I["Semantic decoder"]
+    I --> J["Recovered sentence"]
+    J --> K["Evaluation metrics"]
+    A --> K
+
+    K --> L["Similarity"]
+    K --> M["Compression ratio"]
+    K --> N["Semantic efficiency"]
 ```
+
+## Core Method
+
+The core method is semantic-first transmission:
+
+1. Extract meaning-bearing concepts from the source text.
+2. Preserve critical semantic flags such as time, quantity, location, intent, and negation.
+3. Compress the semantic frame through a bottleneck.
+4. Transmit compact semantic code instead of the original sentence.
+5. Decode the compact code into a meaning-preserving recovered sentence.
+6. Evaluate whether the receiver still understands the intended message.
+
+The current prototype is intentionally interpretable and rule-based. It is a baseline for deciding when to replace each block with learned embeddings, vector quantization, or channel simulation.
+
+See [docs/core-method.md](docs/core-method.md) for the full DOCUMENT explanation.
 
 ## What This Version Proves
 
