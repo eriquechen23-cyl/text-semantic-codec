@@ -1,0 +1,11 @@
+{
+  "metrics": [
+    "exact_match",
+    "bleu",
+    "rouge_l",
+    "sentence_similarity",
+    "compression_ratio",
+    "semantic_efficiency"
+  ],
+  "description": "Decision metrics for text semantic communication."
+}

@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stage 01 Report - Text Semantic Codec Prototype</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #202124;
+      --muted: #5f6368;
+      --line: #d8dee4;
+      --accent: #0b6b57;
+      --warn: #9a5b00;
+      --bg: #f7f8fa;
+      --panel: #ffffff;
+    }
+    body {
+      margin: 0;
+      font-family: Arial, "Noto Sans TC", sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.55;
+    }
+    main {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+    header, section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 22px;
+      margin-bottom: 18px;
+    }
+    h1, h2, h3 {
+      margin: 0 0 12px;
+      letter-spacing: 0;
+    }
+    h1 {
+      font-size: 30px;
+    }
+    h2 {
+      font-size: 21px;
+      color: var(--accent);
+    }
+    p {
+      margin: 0 0 12px;
+    }
+    code, pre {
+      font-family: Consolas, "Liberation Mono", monospace;
+    }
+    pre {
+      overflow-x: auto;
+      background: #f0f3f5;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 14px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: #eef6f4;
+    }
+    .decision {
+      border-left: 4px solid var(--accent);
+    }
+    .risk {
+      border-left: 4px solid var(--warn);
+    }
+    .muted {
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="muted">Stage 01 - Text Only Prototype</p>
+      <h1>Text Semantic Codec 決策報告</h1>
+      <p>本階段建立一個可執行、可測量、可解釋的文字語意通訊原型。重點不是先訓練大型模型，而是驗證 repo 架構、資料流、metric 與 demo 形式是否足以支援下一階段決策。</p>
+    </header>
+
+    <section>
+      <h2>Prototype Scope</h2>
+      <table>
+        <tr><th>項目</th><th>本階段決定</th></tr>
+        <tr><td>Input</td><td>English sentence</td></tr>
+        <tr><td>Semantic encoder</td><td>Rule-based concept extraction</td></tr>
+        <tr><td>Bottleneck</td><td>Discrete codebook hash 或 continuous hashed vector</td></tr>
+        <tr><td>Decoder</td><td>Rule-based canonical reconstruction</td></tr>
+        <tr><td>Metrics</td><td>Exact match, BLEU, ROUGE-L, sentence similarity, compression ratio, semantic efficiency</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>Data Flow</h2>
+      <pre>Input Sentence
+  -> Tokenizer
+  -> Semantic Encoder
+  -> Semantic Bottleneck
+  -> Compact Semantic Code
+  -> Semantic Decoder
+  -> Recovered Sentence
+  -> Metrics</pre>
+    </section>
+
+    <section>
+      <h2>Demo Command</h2>
+      <pre>python scripts/run_demo.py --text "The meeting has been postponed because of the heavy rain." --mode discrete --semantic-tokens 4 --codebook-size 256</pre>
+      <p>這個 demo 會輸出 semantic concepts、semantic flags、semantic code、recovered sentence 與 metrics。</p>
+    </section>
+
+    <section class="decision">
+      <h2>Decision</h2>
+      <p>建議接受 Stage 01 作為文字語意通訊 prototype 的基線。下一階段應優先做 embedding-based semantic similarity 與 continuous bottleneck 實驗，而不是立刻加入 wireless channel，因為目前最關鍵的不確定性仍是「語意是否被保留」的量測方法。</p>
+    </section>
+
+    <section class="risk">
+      <h2>Risks</h2>
+      <table>
+        <tr><th>風險</th><th>影響</th><th>下一步</th></tr>
+        <tr><td>Rule-based semantic vocabulary 太小</td><td>遇到開放句型會重建粗糙</td><td>加入 sentence embedding encoder</td></tr>
+        <tr><td>Similarity metric 還不是真模型語意</td><td>可能高估或低估保真度</td><td>導入 Sentence Transformer 或 OpenAI embedding 評估</td></tr>
+        <tr><td>Discrete codebook 目前是 hash，不是 learned codebook</td><td>無法代表真正 VQ 訓練效果</td><td>用 clustering 或 VQ-VAE 替代</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>Next Stage Checklist</h2>
+      <ul>
+        <li>建立 embedding encoder baseline。</li>
+        <li>比較 bottleneck dimensions: 128, 64, 32, 16。</li>
+        <li>新增 semantic error categories: negation, time, quantity, location, named entity, intent。</li>
+        <li>產生 Stage 02 report.html，記錄是否值得進入 learned codebook。</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,20 @@
+[
+  {
+    "category": "paraphrase",
+    "original": "My car was parked there.",
+    "candidate": "My automobile was parked there.",
+    "expected_semantic_match": true
+  },
+  {
+    "category": "time",
+    "original": "The delivery must arrive before 8 AM.",
+    "candidate": "The delivery should arrive after 8 AM.",
+    "expected_semantic_match": false
+  },
+  {
+    "category": "intent",
+    "original": "The software engineer fixed the server problem.",
+    "candidate": "The developer resolved the server issue.",
+    "expected_semantic_match": true
+  }
+]

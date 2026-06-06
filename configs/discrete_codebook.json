@@ -1,0 +1,6 @@
+{
+  "mode": "discrete",
+  "codebook_size": 256,
+  "semantic_tokens": 4,
+  "description": "Stage-01 discrete semantic codebook prototype."
+}
