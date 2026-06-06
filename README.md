@@ -58,6 +58,14 @@ The core method is semantic-first transmission:
 
 The current prototype is intentionally interpretable and rule-based. It is a baseline for deciding when to replace each block with learned embeddings, vector quantization, or channel simulation.
 
+| Block | Role |
+| --- | --- |
+| Tokenizer | Normalize text into tokens. |
+| Semantic encoder | Extract concepts and flags. |
+| Bottleneck | Compress meaning into discrete IDs or vectors. |
+| Semantic decoder | Reconstruct a meaning-preserving sentence. |
+| Metrics | Measure similarity, compression, and efficiency. |
+
 See [docs/core-method.md](docs/core-method.md) for the full DOCUMENT explanation.
 
 ## What This Version Proves

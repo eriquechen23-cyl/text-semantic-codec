@@ -18,18 +18,30 @@ The recovered sentence does not need to match the original word by word. It shou
 
 ```mermaid
 flowchart TD
-    A["1. Source text<br/>The meeting has been postponed because of heavy rain."] --> B["2. Tokenizer<br/>split text into normalized tokens"]
-    B --> C["3. Semantic encoder<br/>map tokens to concepts"]
-    C --> D["4. Semantic frame<br/>concepts: meeting, delay, heavy, rain<br/>flags: time, quantity, location, intent, negation"]
-    D --> E{"5. Semantic bottleneck"}
-    E --> F["Discrete mode<br/>hash concepts into codebook IDs<br/>example: [54, 16, 94, 197]"]
-    E --> G["Continuous mode<br/>hash concepts into fixed-size vector"]
-    F --> H["6. Compact semantic code<br/>small payload for transmission"]
+    A["1. Source text"] --> B["2. Tokenizer"]
+    B --> C["3. Semantic encoder"]
+    C --> D["4. Semantic frame"]
+    D --> E{"5. Bottleneck"}
+    E --> F["Discrete codebook"]
+    E --> G["Continuous vector"]
+    F --> H["6. Semantic code"]
     G --> H
-    H --> I["7. Semantic decoder<br/>reconstruct canonical meaning"]
-    I --> J["8. Recovered text<br/>The meeting was delayed due to heavy rain."]
-    J --> K["9. Metrics<br/>similarity, BLEU, ROUGE-L, compression ratio"]
+    H --> I["7. Semantic decoder"]
+    I --> J["8. Recovered text"]
+    J --> K["9. Metrics"]
 ```
+
+| Step | What Happens | Example |
+| --- | --- | --- |
+| 1. Source text | Receive the original user sentence. | `The meeting has been postponed because of the heavy rain.` |
+| 2. Tokenizer | Split text into normalized tokens. | `meeting`, `postponed`, `heavy`, `rain` |
+| 3. Semantic encoder | Map tokens to meaning-bearing concepts. | `postponed -> delay` |
+| 4. Semantic frame | Store concepts and semantic flags. | concepts: `meeting`, `delay`, `heavy`, `rain` |
+| 5. Bottleneck | Compress meaning into a compact representation. | discrete or continuous |
+| 6. Semantic code | Transmit compact semantic payload. | `[54, 16, 94, 197]` |
+| 7. Semantic decoder | Reconstruct canonical meaning. | delay + rain -> delayed due to rain |
+| 8. Recovered text | Produce a meaning-preserving sentence. | `The meeting was delayed due to heavy rain.` |
+| 9. Metrics | Evaluate meaning and compression. | similarity, BLEU, ROUGE-L, compression ratio |
 
 ## Step-by-Step Explanation
 
