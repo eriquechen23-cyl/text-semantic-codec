@@ -6,3 +6,6 @@ venv/
 dist/
 build/
 *.egg-info/
+
+# Local Codex workflow reports
+reports/REPORT.md
