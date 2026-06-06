@@ -49,9 +49,19 @@
       </table>
     </section>
 
+    <section class="ok">
+      <h2>Vercel Deployment</h2>
+      <table>
+        <tr><th>項目</th><th>結果</th></tr>
+        <tr><td>Production URL</td><td><code>https://frontend-coral-psi-78.vercel.app</code></td></tr>
+        <tr><td>Deployment ID</td><td><code>dpl_32NDjzbt5pG5gFLYUsEJmQPxzKva</code></td></tr>
+        <tr><td>Verification</td><td><code>HTTP 200</code> and <code>&lt;app-root&gt;</code> present.</td></tr>
+      </table>
+    </section>
+
     <section class="blocked">
-      <h2>External Deployment Dependency</h2>
-      <p>Render deployment requires either a logged-in Render Dashboard session or a Render API key/CLI. At this checkpoint, local tooling did not expose Render CLI or <code>RENDER_API_KEY</code>. Vercel deployment can proceed through Vercel CLI or the connected Vercel tool if account authorization is available.</p>
+      <h2>Render Deployment Blocker</h2>
+      <p>Render deployment requires either a logged-in Render Dashboard session or a Render API key/CLI. At this checkpoint, local tooling did not expose Render CLI or <code>RENDER_API_KEY</code>, so the backend service could not be created programmatically from this environment. The repo is ready for Render Blueprint creation from <code>render.yaml</code>.</p>
     </section>
   </main>
 </body>

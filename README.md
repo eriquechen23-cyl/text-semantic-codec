@@ -98,8 +98,17 @@ The UI includes an editable backend API URL field, so local and Render deploymen
 Create a Render Blueprint from this GitHub repo. Render will read `render.yaml` and create:
 
 - `text-semantic-codec-api`
-- `text-semantic-codec-ui`
 
-After deployment, set the API service `ALLOWED_ORIGINS` value to the final frontend Render URL instead of `*` for production use.
+After deployment, set the API service `ALLOWED_ORIGINS` value to the final Vercel frontend URL instead of `*` for production use.
+
+### Vercel Frontend Deployment
+
+The Angular UI is configured for Vercel with `frontend/vercel.json`.
+
+Current production deployment:
+
+```text
+https://frontend-coral-psi-78.vercel.app
+```
 
 See [reports/stage-02-render-angular/report.html](reports/stage-02-render-angular/report.html) for the deployment decision report.

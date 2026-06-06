@@ -3,6 +3,7 @@ __pycache__/
 .pytest_cache/
 node_modules/
 frontend/.angular/
+.vercel/
 .venv/
 venv/
 dist/
