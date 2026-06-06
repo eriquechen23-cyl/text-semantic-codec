@@ -27,7 +27,7 @@ interface ConvertResponse {
 class AppComponent {
   private readonly http = inject(HttpClient);
 
-  apiBaseUrl = 'http://localhost:8000';
+  apiBaseUrl = 'https://text-semantic-codec-api.onrender.com';
   inputText = 'The meeting has been postponed because of the heavy rain.';
   mode: Mode = 'discrete';
   codebookSize = 256;

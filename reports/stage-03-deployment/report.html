@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stage 03 Report - Deployment Verification</title>
+  <style>
+    body { margin: 0; font-family: Arial, "Noto Sans TC", sans-serif; color: #202124; background: #f6f8fa; line-height: 1.55; }
+    main { max-width: 1040px; margin: 0 auto; padding: 32px 20px; }
+    section, header { background: #fff; border: 1px solid #d8dee4; border-radius: 8px; padding: 22px; margin-bottom: 16px; }
+    h1, h2 { margin: 0 0 12px; letter-spacing: 0; }
+    h1 { font-size: 30px; }
+    h2 { color: #0b6b57; font-size: 21px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    th, td { border: 1px solid #d8dee4; padding: 10px; text-align: left; vertical-align: top; }
+    th { background: #eef6f4; }
+    code, pre { font-family: Consolas, "Liberation Mono", monospace; }
+    pre { overflow-x: auto; background: #f0f3f5; border: 1px solid #d8dee4; border-radius: 6px; padding: 14px; }
+    .ok { border-left: 4px solid #0b6b57; }
+    .blocked { border-left: 4px solid #9a5b00; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p>Stage 03 - Deployment Verification</p>
+      <h1>Render Backend + Vercel Frontend 部署報告</h1>
+      <p>本階段目標是確認 FastAPI 後端與 Angular 21 前端可以分別建置、以 HTTP 方式運作，並準備部署到 Render 與 Vercel。</p>
+    </header>
+
+    <section class="ok">
+      <h2>Local Verification</h2>
+      <table>
+        <tr><th>項目</th><th>結果</th></tr>
+        <tr><td>Python unit tests</td><td><code>6 passed, 1 skipped</code></td></tr>
+        <tr><td>FastAPI HTTP health</td><td><code>GET /health -> 200 ok</code></td></tr>
+        <tr><td>FastAPI semantic conversion</td><td><code>POST /api/semantic/convert -> recovered text + 32-bit code</code></td></tr>
+        <tr><td>Angular production build</td><td><code>npm --prefix frontend run build -> success</code></td></tr>
+        <tr><td>Static frontend artifact</td><td><code>HTTP static server -> index.html loads app-root</code></td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>Deployment Configuration</h2>
+      <table>
+        <tr><th>Target</th><th>Configuration</th></tr>
+        <tr><td>Render backend</td><td><code>render.yaml</code> defines <code>text-semantic-codec-api</code> only.</td></tr>
+        <tr><td>Vercel frontend</td><td><code>frontend/vercel.json</code> defines Angular build output and SPA rewrite.</td></tr>
+      </table>
+    </section>
+
+    <section class="blocked">
+      <h2>External Deployment Dependency</h2>
+      <p>Render deployment requires either a logged-in Render Dashboard session or a Render API key/CLI. At this checkpoint, local tooling did not expose Render CLI or <code>RENDER_API_KEY</code>. Vercel deployment can proceed through Vercel CLI or the connected Vercel tool if account authorization is available.</p>
+    </section>
+  </main>
+</body>
+</html>
