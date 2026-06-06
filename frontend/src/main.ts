@@ -22,12 +22,12 @@ interface ConvertResponse {
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './app/app.html',
-  styleUrl: './app/app.css'
+  styleUrl: './app/app.scss'
 })
 class AppComponent {
   private readonly http = inject(HttpClient);
 
-  apiBaseUrl = 'https://text-semantic-codec-api.onrender.com';
+  private readonly apiBaseUrl = 'https://text-semantic-codec-api.onrender.com';
   inputText = 'The meeting has been postponed because of the heavy rain.';
   mode: Mode = 'discrete';
   codebookSize = 256;

@@ -1,48 +1,50 @@
 <main class="workspace">
-  <section class="input-panel">
-    <div class="title-row">
-      <div>
-        <p class="eyebrow">Text Semantic Codec</p>
-        <h1>Semantic Text Conversion</h1>
+  <section class="console-shell">
+    <div class="hero-visual" aria-hidden="true">
+      <img src="/semantic-channel-hero.png" alt="">
+      <div class="scanline"></div>
+    </div>
+
+    <div class="input-panel">
+      <div class="title-row">
+        <div>
+          <p class="eyebrow">Semantic Communication Console</p>
+          <h1>Text Meaning Transmission</h1>
+        </div>
+        <button type="button" class="primary" (click)="convert()" [disabled]="loading()">
+          {{ loading() ? 'Transmitting' : 'Transmit' }}
+        </button>
       </div>
-      <button type="button" class="primary" (click)="convert()" [disabled]="loading()">
-        {{ loading() ? 'Converting' : 'Convert' }}
-      </button>
+
+      <label class="field">
+        <span>Source Message</span>
+        <textarea [(ngModel)]="inputText" rows="7"></textarea>
+      </label>
+
+      <div class="controls">
+        <label class="field compact">
+          <span>Mode</span>
+          <select [(ngModel)]="mode">
+            <option value="discrete">Discrete codebook</option>
+            <option value="continuous">Continuous vector</option>
+          </select>
+        </label>
+        <label class="field compact">
+          <span>Codebook Size</span>
+          <input [(ngModel)]="codebookSize" type="number" min="2" max="4096">
+        </label>
+        <label class="field compact">
+          <span>Semantic Tokens</span>
+          <input [(ngModel)]="semanticTokens" type="number" min="1" max="32">
+        </label>
+        <label class="field compact">
+          <span>Vector Dimensions</span>
+          <input [(ngModel)]="dimensions" type="number" min="1" max="1024">
+        </label>
+      </div>
+
+      <p class="error" *ngIf="error()">{{ error() }}</p>
     </div>
-
-    <label class="field">
-      <span>Backend API</span>
-      <input [(ngModel)]="apiBaseUrl" type="url">
-    </label>
-
-    <label class="field">
-      <span>Input Text</span>
-      <textarea [(ngModel)]="inputText" rows="7"></textarea>
-    </label>
-
-    <div class="controls">
-      <label class="field compact">
-        <span>Mode</span>
-        <select [(ngModel)]="mode">
-          <option value="discrete">Discrete codebook</option>
-          <option value="continuous">Continuous vector</option>
-        </select>
-      </label>
-      <label class="field compact">
-        <span>Codebook Size</span>
-        <input [(ngModel)]="codebookSize" type="number" min="2" max="4096">
-      </label>
-      <label class="field compact">
-        <span>Semantic Tokens</span>
-        <input [(ngModel)]="semanticTokens" type="number" min="1" max="32">
-      </label>
-      <label class="field compact">
-        <span>Vector Dimensions</span>
-        <input [(ngModel)]="dimensions" type="number" min="1" max="1024">
-      </label>
-    </div>
-
-    <p class="error" *ngIf="error()">{{ error() }}</p>
   </section>
 
   <section class="result-panel" *ngIf="result() as output">
@@ -62,11 +64,11 @@
     </div>
 
     <div class="columns">
-      <div class="section">
+      <div class="section code-section">
         <h2>Semantic Code</h2>
         <p class="code">{{ output.semantic_code.join(', ') }}</p>
       </div>
-      <div class="section">
+      <div class="section recovered-section">
         <h2>Recovered Text</h2>
         <p>{{ output.recovered }}</p>
       </div>

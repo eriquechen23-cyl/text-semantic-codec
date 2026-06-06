@@ -12,4 +12,4 @@ npm install
 npm start
 ```
 
-The UI lets users set the backend API URL, so local and Render deployments can use the same build.
+The backend API URL is kept in the Angular application code and is not shown in the user interface.

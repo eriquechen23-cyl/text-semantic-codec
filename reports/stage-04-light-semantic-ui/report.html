@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stage 04 Report - Light Semantic UI</title>
+  <style>
+    body { margin: 0; font-family: Arial, "Noto Sans TC", sans-serif; color: #16313b; background: #edf7f8; line-height: 1.55; }
+    main { max-width: 1040px; margin: 0 auto; padding: 32px 20px; }
+    section, header { background: rgba(255,255,255,.9); border: 1px solid rgba(31,129,145,.18); border-radius: 8px; padding: 22px; margin-bottom: 16px; }
+    h1, h2 { margin: 0 0 12px; letter-spacing: 0; }
+    h1 { font-size: 30px; }
+    h2 { color: #087f92; font-size: 21px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    th, td { border: 1px solid rgba(31,129,145,.18); padding: 10px; text-align: left; vertical-align: top; }
+    th { background: #e2f4f2; }
+    code { font-family: Consolas, "Liberation Mono", monospace; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p>Stage 04 - Light Semantic Communication UI</p>
+      <h1>淺色語意通訊介面更新報告</h1>
+      <p>本階段將前端從簡單白色工具頁改為明亮、具語意通訊主題的 Angular 21 UI，並加入生成式主視覺與 SCSS theme。</p>
+    </header>
+
+    <section>
+      <h2>Changes</h2>
+      <table>
+        <tr><th>項目</th><th>結果</th></tr>
+        <tr><td>Visual asset</td><td>新增 <code>frontend/public/semantic-channel-hero.png</code>。</td></tr>
+        <tr><td>Styling</td><td>由 CSS 轉為 SCSS，加入淺色語意通訊 theme。</td></tr>
+        <tr><td>UI copy</td><td>改為 transmission/semantic console 語境。</td></tr>
+        <tr><td>API visibility</td><td>Backend API URL 保留在程式內部，不顯示於前端頁面。</td></tr>
+        <tr><td>Verification</td><td>Angular production build success；static artifact loads；Python tests pass。</td></tr>
+      </table>
+    </section>
+  </main>
+</body>
+</html>

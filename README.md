@@ -91,7 +91,7 @@ npm install
 npm start
 ```
 
-The UI includes an editable backend API URL field, so local and Render deployments can point to different API hosts without rebuilding.
+The frontend calls the deployed Render backend URL from application code and does not show the backend API field in the user interface.
 
 ### Render Deployment
 
